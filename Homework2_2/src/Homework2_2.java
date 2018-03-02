@@ -2,13 +2,17 @@ import java.util.Scanner;
 
 public class Homework2_2 {
     public static void main(String[] args) {
+        //create instance of "Scanner" class with "System.in" param
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите параметры:");
+        //read data from console, declarate and initialize variables 
         int algorithmId = sc.nextInt();
         int loopType = sc.nextInt();
         int n = sc.nextInt();
+        //close scanner 
         sc.close();  
         
+        //define algorithm
         switch(algorithmId){
             case 1: 
                 chooseFibonacci(n, loopType);
@@ -16,12 +20,12 @@ public class Homework2_2 {
             case 2: 
                 chooseFactorial(n, loopType);
                 break;
-                default:
+           default:
                 System.out.println("Введите 1 или 2 в качестве первого параметра");
         }
-        
-        
     }
+    
+    //choose Fibonacci loop depending on the user's choice
     public static void chooseFibonacci(int n, int loopType){
          switch(loopType){
             case 1: 
@@ -38,6 +42,7 @@ public class Homework2_2 {
         } 
     }
     
+    //choose factorial loop depending on the user's choice
     public static void chooseFactorial(int n, int loopType){
          switch(loopType){
             case 1: 
@@ -53,15 +58,18 @@ public class Homework2_2 {
                 System.out.println("Введите 1, 2 или 3 в качестве второго параметра");
         } 
     }
-       
+    
+    //calculate Fibonacci numbers via While loop
     public static int calculateFibonacciWhile(int n){
         int s = 0;
         int i = 2;
         int n0 = 1;
         int n1 = 1;
         
+        //first and second numbers of Fibonacci sequence is 1
         if (n == 1 || n == 2) {
             s = 1;
+        //calculate third and more numbers
         } else {
             while (i < n) {
                 s = n0 + n1;
@@ -75,6 +83,7 @@ public class Homework2_2 {
         return(s);
     }
     
+    //calculate Fibonacci numbers via Do-While loop
     public static int calculateFibonacciDoWhile(int n){
         int s = 0;
         int i = 3;
@@ -96,6 +105,7 @@ public class Homework2_2 {
         return(s);
     }
     
+    //calculate Fibonacci numbers via For loop
     public static int calculateFibonacciFor(int n){
         int s = 0;
         int i;
@@ -116,6 +126,7 @@ public class Homework2_2 {
         return(s);
     }
     
+    //calculate factorial via While loop
     public static int calculateFactorialWhile(int n){
         int s = 1;
         int i = 0;
@@ -129,6 +140,7 @@ public class Homework2_2 {
         return(s);
     }
     
+    //calculate factorial via Do-While loop
     public static int calculateFactorialDoWhile(int n){
         int s = 1;
         int i = 0;
@@ -142,6 +154,7 @@ public class Homework2_2 {
         return(s);
     }
     
+    //calculate factorial via For loop
     public static int calculateFactorialFor(int n){
         int s = 1;
         int i;
