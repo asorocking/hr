@@ -1,3 +1,5 @@
+package com.asorokin;
+
 import java.util.Scanner;
 
 public class Homework2_2 {
@@ -5,10 +7,12 @@ public class Homework2_2 {
         //create instance of "Scanner" class with "System.in" param
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите параметры:");
+        
         //read data from console, declarate and initialize variables 
         int algorithmId = sc.nextInt();
         int loopType = sc.nextInt();
         int n = sc.nextInt();
+        
         //close scanner 
         sc.close();  
         
@@ -41,7 +45,7 @@ public class Homework2_2 {
                 System.out.println("Введите 1, 2 или 3 в качестве второго параметра");
         } 
     }
-    
+           
     //choose factorial loop depending on the user's choice
     public static void chooseFactorial(int n, int loopType){
          switch(loopType){

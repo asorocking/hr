@@ -1,15 +1,28 @@
+package com.asorokin;
+
 public class Homework2_1{
     public static void main(String[] args) {
         //declarate variables
         int a, p; 
         double m1, m2, G;
         
+        //check whole params enter
+        String[] test = {"", "", "", ""};
+        try {
+            for (int i = 0; i < 4; i++) {
+                test[i] = args[i];
+            }
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Введены не все параметры");
+        }
+        
         //initialize variables over args from command line
         a = Integer.parseInt(args[0]);
         p = Integer.parseInt(args[1]);
         m1 = Double.parseDouble(args[2]);
         m2 = Double.parseDouble(args[3]);
-        
+      
+                
         //invoke "calculate" method with parameters
         G = calculate(a, p, m1, m2);
         
