@@ -5,12 +5,16 @@
  */
 package com.asorokin;
 
+<<<<<<< HEAD
 import java.util.Arrays;
 
+=======
+>>>>>>> 125e46963ceebc833ea3b91435fb4c3f15c66169
 /**
  *
  * @author sorokin
  */
+<<<<<<< HEAD
 public final class Median {
     
     public static float median(int[] array) {
@@ -33,3 +37,8 @@ public final class Median {
         }
     }
 }
+=======
+public class Median {
+    
+}
+>>>>>>> 125e46963ceebc833ea3b91435fb4c3f15c66169
