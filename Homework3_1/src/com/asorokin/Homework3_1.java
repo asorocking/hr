@@ -1,5 +1,6 @@
 package com.asorokin;
 
+import java.text.NumberFormat;
 import java.util.Scanner;
 
 /*
@@ -13,14 +14,19 @@ import java.util.Scanner;
  * @author sorokin
  */
 public class Homework3_1 {
-
-    public static void main(String[] args) {
-        String name = "Ivan Divanov";
-        double balance = 120.14;
-        double increaseAmount = 34.58;
-        double decreaseAmount = 112.80;
-        double rate = 0.5;
+        private static String name = "Ivan Divanov";
+        private static double balance = 1120.14;
+        private static String formattedBalance;
+        private static double increaseAmount = 34.08;
+        private static double decreaseAmount = 112.80;
+        private static double rate = 0.5;
         
+    public static void main(String[] args) {
+        double d;
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        numberFormat.setMaximumFractionDigits(2);
+        numberFormat.setGroupingUsed(true);
+
         Card card1 = new Card();
         System.out.println("Конструктор по умолчанию");
         System.out.println("Имя владельца карты: " + card1.getName());
@@ -28,28 +34,50 @@ public class Homework3_1 {
         System.out.println();
         
         Card card2 = new Card(name);
+        d = card2.getBalance();
+        formattedBalance = numberFormat.format(d);
         System.out.println("Конструктор с именем владельца карты");
         System.out.println("Имя владельца карты: " + card2.getName());
-        System.out.println("Баланс карты: " + card2.getBalance());
+        System.out.println("Баланс карты: " + formattedBalance);
         System.out.println();
         
         Card card3 = new Card(name, balance);
+        d = card3.getBalance();
+        formattedBalance = numberFormat.format(d);    
         System.out.println("Конструктор с именем владельца карты");
         System.out.println("Имя владельца карты: " + card3.getName());
-        System.out.println("Баланс карты: " + card3.getBalance());
+        System.out.println("Баланс карты: " + formattedBalance);
         System.out.println();
         
-        System.out.println("Пополнение карты на " + increaseAmount);
+        d = card3.getBalance();
+        formattedBalance = numberFormat.format(d);
+        System.out.println("Пополнение баланса карты на " + increaseAmount);
+        System.out.println(formattedBalance + " + " + increaseAmount);
+        d = card3.increaseBalance(increaseAmount);
+        formattedBalance = numberFormat.format(d);
+        System.out.println("Баланс карты после пополнения: " + 
+                formattedBalance);
+        System.out.println();
         
-        System.out.println(card3.getBalance() + );
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        d = card3.getBalance();
+        formattedBalance = numberFormat.format(d);
+        System.out.println("Уменьшение баланса карты на " + decreaseAmount);
+        System.out.println(formattedBalance + " - " + decreaseAmount);
+        d = card3.decreaseBalance(decreaseAmount);
+        formattedBalance = numberFormat.format(d);
+        System.out.println("Баланс карты после уменьшения: " + 
+                formattedBalance);
         System.out.println();
         
+        d = card3.getBalance();
+        formattedBalance = numberFormat.format(d);
+        System.out.println("Вывод баланса карты в другой валюте. Курс " + 
+                + rate);
+        System.out.println(formattedBalance + " * " + rate);
+        d = card3.otherCurrencyBalance(rate);
+        formattedBalance = numberFormat.format(d);
+        System.out.println("Баланс карты в другой валюте: " + 
+                formattedBalance);
     }
     
 }
