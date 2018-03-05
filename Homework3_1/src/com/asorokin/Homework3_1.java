@@ -14,33 +14,43 @@ import java.util.Scanner;
  * @author sorokin
  */
 public class Homework3_1 {
-        private static String name = "Ivan Divanov";
-        private static double balance = 1120.14;
-        private static String formattedBalance;
-        private static double increaseAmount = 34.08;
-        private static double decreaseAmount = 112.80;
-        private static double rate = 0.5;
+    
+    //Since the data entry type was not explicitly specified, 
+    //the parameters for the methods are assigned to variables.
+    private static String name = "Ivan Divanov";  //cardholder name
+    private static double balance = 1120.14;      //card balance
+    private static String formattedBalance;       //variable for formatted card balance 
+    private static double increaseAmount = 34.08; //amount of increase balance
+    private static double decreaseAmount = 112.80;//amount of decrease balance
+    private static double rate = 0.5;             //exchange rate 
         
     public static void main(String[] args) {
-        double d;
+        double d; //variable for new balance amount
+        
+        //create instance of NumberFormat class for format double type result
         NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        numberFormat.setMaximumFractionDigits(2);
-        numberFormat.setGroupingUsed(true);
+        numberFormat.setMaximumFractionDigits(2); //set two digits after point
+        numberFormat.setGroupingUsed(true); //grouping digits
 
+        //using default constructor
         Card card1 = new Card();
         System.out.println("Конструктор по умолчанию");
+        //using method of getting cardholder name
         System.out.println("Имя владельца карты: " + card1.getName());
+        //using method of getting card balance
         System.out.println("Баланс карты: " + card1.getBalance());
         System.out.println();
         
+        //using constructor with one String parameter
         Card card2 = new Card(name);
         d = card2.getBalance();
-        formattedBalance = numberFormat.format(d);
+        formattedBalance = numberFormat.format(d); //format balance amount
         System.out.println("Конструктор с именем владельца карты");
         System.out.println("Имя владельца карты: " + card2.getName());
         System.out.println("Баланс карты: " + formattedBalance);
         System.out.println();
         
+        //using constructor with two parameters: String and double
         Card card3 = new Card(name, balance);
         d = card3.getBalance();
         formattedBalance = numberFormat.format(d);    
@@ -49,6 +59,7 @@ public class Homework3_1 {
         System.out.println("Баланс карты: " + formattedBalance);
         System.out.println();
         
+        //using method of increasing balance
         d = card3.getBalance();
         formattedBalance = numberFormat.format(d);
         System.out.println("Пополнение баланса карты на " + increaseAmount);
@@ -59,6 +70,7 @@ public class Homework3_1 {
                 formattedBalance);
         System.out.println();
         
+        //using method of decreasing balance
         d = card3.getBalance();
         formattedBalance = numberFormat.format(d);
         System.out.println("Уменьшение баланса карты на " + decreaseAmount);
@@ -69,6 +81,7 @@ public class Homework3_1 {
                 formattedBalance);
         System.out.println();
         
+        //using method of change balance currency with exchange rate
         d = card3.getBalance();
         formattedBalance = numberFormat.format(d);
         System.out.println("Вывод баланса карты в другой валюте. Курс " + 
