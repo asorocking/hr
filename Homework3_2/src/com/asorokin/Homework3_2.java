@@ -11,19 +11,15 @@ package com.asorokin;
  * @author sorokin
  */
 public class Homework3_2 {
-<<<<<<< HEAD
-=======
 
->>>>>>> 125e46963ceebc833ea3b91435fb4c3f15c66169
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-<<<<<<< HEAD
+
     }
-=======
+
         // TODO code application logic here
-    }
-    
->>>>>>> 125e46963ceebc833ea3b91435fb4c3f15c66169
 }
+    
+
