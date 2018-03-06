@@ -1,25 +1,14 @@
 package com.asorokin;
 
 import java.text.NumberFormat;
-import java.util.Scanner;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author sorokin
- */
 public class Homework3_1 {
-        private static String name = "Ivan Divanov";
-        private static double balance = 1120.14;
+        private static final String NAME = "Ivan Divanov";
+        private static final double BALANCE = 1120.14;
         private static String formattedBalance;
-        private static double increaseAmount = 34.08;
-        private static double decreaseAmount = 112.80;
-        private static double rate = 0.5;
+        private static final double INCREASE_AMOUNT = 34.08;
+        private static final double DECREASE_AMOUNT = 112.80;
+        private static double RATE = 0.5;
         
     public static void main(String[] args) {
         double d;
@@ -33,7 +22,7 @@ public class Homework3_1 {
         System.out.println("Баланс карты: " + card1.getBalance());
         System.out.println();
         
-        Card card2 = new Card(name);
+        Card card2 = new Card(NAME);
         d = card2.getBalance();
         formattedBalance = numberFormat.format(d);
         System.out.println("Конструктор с именем владельца карты");
@@ -41,7 +30,7 @@ public class Homework3_1 {
         System.out.println("Баланс карты: " + formattedBalance);
         System.out.println();
         
-        Card card3 = new Card(name, balance);
+        Card card3 = new Card(NAME, BALANCE);
         d = card3.getBalance();
         formattedBalance = numberFormat.format(d);    
         System.out.println("Конструктор с именем владельца карты");
@@ -51,9 +40,9 @@ public class Homework3_1 {
         
         d = card3.getBalance();
         formattedBalance = numberFormat.format(d);
-        System.out.println("Пополнение баланса карты на " + increaseAmount);
-        System.out.println(formattedBalance + " + " + increaseAmount);
-        d = card3.increaseBalance(increaseAmount);
+        System.out.println("Пополнение баланса карты на " + INCREASE_AMOUNT);
+        System.out.println(formattedBalance + " + " + INCREASE_AMOUNT);
+        d = card3.increaseBalance(INCREASE_AMOUNT);
         formattedBalance = numberFormat.format(d);
         System.out.println("Баланс карты после пополнения: " + 
                 formattedBalance);
@@ -61,9 +50,9 @@ public class Homework3_1 {
         
         d = card3.getBalance();
         formattedBalance = numberFormat.format(d);
-        System.out.println("Уменьшение баланса карты на " + decreaseAmount);
-        System.out.println(formattedBalance + " - " + decreaseAmount);
-        d = card3.decreaseBalance(decreaseAmount);
+        System.out.println("Уменьшение баланса карты на " + DECREASE_AMOUNT);
+        System.out.println(formattedBalance + " - " + DECREASE_AMOUNT);
+        d = card3.decreaseBalance(DECREASE_AMOUNT);
         formattedBalance = numberFormat.format(d);
         System.out.println("Баланс карты после уменьшения: " + 
                 formattedBalance);
@@ -72,9 +61,9 @@ public class Homework3_1 {
         d = card3.getBalance();
         formattedBalance = numberFormat.format(d);
         System.out.println("Вывод баланса карты в другой валюте. Курс " + 
-                + rate);
-        System.out.println(formattedBalance + " * " + rate);
-        d = card3.otherCurrencyBalance(rate);
+                + RATE);
+        System.out.println(formattedBalance + " * " + RATE);
+        d = card3.otherCurrencyBalance(RATE);
         formattedBalance = numberFormat.format(d);
         System.out.println("Баланс карты в другой валюте: " + 
                 formattedBalance);
