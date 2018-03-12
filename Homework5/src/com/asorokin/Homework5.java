@@ -22,10 +22,20 @@ interface Path {
  * "Composite"
  */
 class Folder implements Path {
-
+    
+    String name = "";
+    String extension = "";
+    String parent = "";
+    
     //Collection of child paths.
     private List<Path> mChildPaths = new ArrayList<Path>();
-
+    
+    public Folder (String name, String extension, String parent){
+        this.name = name;
+        this.extension = extension;
+        this.parent = parent;
+    }
+    
     //Prints the path.
     public void print() {
         for (Path path : mChildPaths) {
@@ -85,6 +95,25 @@ class Printer {
     }
 }
 
+class Parser {
+    public static List<File> mFiles = new ArrayList<File>();
+    public static void parsePath(String realPath) {
+        
+    }
+    static String[] subStr;
+    static String delimeter = "/";;
+    
+    public static void print(String realPath) {
+        int arrayIndex = mFiles.size();
+        subStr  = realPath.split(delimeter);
+        // Вывод результата на экран
+        for (int i = 0; i < subStr.length; i++) {
+            mFiles.add(arrayIndex, new File(subStr[subStr.length], subStr[subStr.length-1]));
+            System.out.println(subStr[i]);
+        }
+    }
+}
+
 public class Homework5 {
 
     public static void main(String[] args) {
@@ -132,7 +161,7 @@ public class Homework5 {
                     Printer.print(realPath);
                     break;
                 case 2:
-                    realPath = enterString;
+                    Parser.parsePath(realPath);
                     break;
             }
         } while (!enterString.equals("close"));
