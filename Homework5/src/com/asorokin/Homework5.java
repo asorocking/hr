@@ -119,6 +119,7 @@ public class Homework5 {
             Scanner sc = new Scanner(System.in);
             System.out.println("Введите путь или команды print или close:");
             enterString = sc.nextLine();
+            
             if (enterString.equals("print")) {
                 command = 1;
             }
