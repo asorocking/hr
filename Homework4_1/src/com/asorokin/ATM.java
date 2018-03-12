@@ -1,6 +1,7 @@
 package com.asorokin;
 
 public class ATM {
+
     private final int DEBIT_CARD = 1;
     private final int CREDIT_CARD = 2;
     private final int INCREASE_BALANCE = 1;
@@ -9,7 +10,7 @@ public class ATM {
     private double amount;
     private int cardType;
     private int operation;
-    
+
     public ATM(double balance, double amount, int cardType, int operation) {
         this.balance = balance;
         this.amount = amount;
@@ -17,11 +18,12 @@ public class ATM {
         this.operation = operation;
     }
     
-    public void atmWork (){
-        switch(cardType){
-            case DEBIT_CARD: 
-                switch(operation){
-                    case INCREASE_BALANCE: 
+    //Choose card type and operation type
+    public void atmWork() {
+        switch (cardType) {
+            case DEBIT_CARD:
+                switch (operation) {
+                    case INCREASE_BALANCE:
                         atmDebitIncrease(balance, amount);
                         break;
                     case DECREASE_BALANCE:
@@ -29,39 +31,37 @@ public class ATM {
                         break;
                 }
                 break;
-            case CREDIT_CARD: 
-                switch(operation){
-                    case INCREASE_BALANCE: 
+            case CREDIT_CARD:
+                switch (operation) {
+                    case INCREASE_BALANCE:
                         atmCreditIncrease(balance, amount);
                         break;
-                    case DECREASE_BALANCE: 
+                    case DECREASE_BALANCE:
                         atmCreditDecrease(balance, amount);
                         break;
                 }
                 break;
         }
     }
-                
-    
-    
-    public double atmDebitIncrease(double balance, double amount){
+
+    public double atmDebitIncrease(double balance, double amount) {
         DebitCard debitCard = new DebitCard();
         return debitCard.increaseBalance(balance, amount);
     }
-    
-    public double atmDebitDecrease(double balance, double amount){
+
+    public double atmDebitDecrease(double balance, double amount) {
         DebitCard debitCard = new DebitCard();
         return debitCard.decreaseBalance(balance, amount);
     }
-    
-    public double atmCreditIncrease(double balance, double amount){
+
+    public double atmCreditIncrease(double balance, double amount) {
         CreditCard creditCard = new CreditCard();
         return creditCard.increaseBalance(balance, amount);
     }
-    
-    public double atmCreditDecrease(double balance, double amount){
+
+    public double atmCreditDecrease(double balance, double amount) {
         CreditCard creditCard = new CreditCard();
         return creditCard.decreaseBalance(balance, amount);
     }
-    
+
 }

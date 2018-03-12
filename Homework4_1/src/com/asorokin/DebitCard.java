@@ -1,12 +1,13 @@
 package com.asorokin;
 
-public class DebitCard extends Card{
-    public DebitCard(){
+public class DebitCard extends Card {
+
+    public DebitCard() {
         super();
     }
-        
+
     @Override
-    public double decreaseBalance (double balance, double amount){
+    public double decreaseBalance(double balance, double amount) {
         double result = balance - amount;
         if (result < 0) {
             System.out.println("На карте недостаточно средств. Отмена. ");
@@ -17,5 +18,5 @@ public class DebitCard extends Card{
             return result;
         }
     }
-    
+
 }

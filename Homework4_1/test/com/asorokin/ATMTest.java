@@ -4,15 +4,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ATMTest {
-    
+
     final int DEBIT_CARD = 1;
     final int CREDIT_CARD = 2;
     final int INCREASE_BALANCE = 1;
     final int DECREASE_BALANCE = 2;
-        
+
     public ATMTest() {
     }
-    
+
     @Test
     public void testAtmWork() {
         System.out.println("atmWork");
@@ -41,7 +41,7 @@ public class ATMTest {
         double result = atm.atmDebitDecrease(balance, amount);
         assertEquals(expResult, result, 0.0);
     }
-    
+
     @Test
     public void testNegativeAtmDebitDecrease() {
         System.out.println("atmNegativeDebitDecrease");
@@ -52,7 +52,7 @@ public class ATMTest {
         double result = atm.atmDebitDecrease(balance, amount);
         assertEquals(expResult, result, 0.0);
     }
-    
+
     @Test
     public void testAtmCreditIncrease() {
         System.out.println("atmCreditIncrease");
@@ -74,5 +74,5 @@ public class ATMTest {
         double result = atm.atmCreditDecrease(balance, amount);
         assertEquals(expResult, result, 0.0);
     }
-    
+
 }
