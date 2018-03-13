@@ -7,7 +7,44 @@ import java.util.Scanner;
 class Homework5 {
 
     public static void main(String[] args) {
-       
+        Component root = new Directory("root", "Файловая система", 0);
+        
+        Component folder1 = new Directory("folder1", "root", 1);
+        root.add(folder1);
+        Component folder2 = new Directory("folder2", "root", 1);
+        root.add(folder2);
+        // новые файлы
+        Component file2_1 = new File("file2_1", "folder2", 2);
+        folder2.add(file2_1);
+        Component file1_2 = new File("file1_2", "folder1", 2);
+        folder1.add(file1_2);
+        Component file1_3 = new File("file1_3", "folder1", 2);
+        folder1.add(file1_3);
+        Component file1_1 = new File("file1_1", "folder1", 2);
+        folder1.add(file1_1);
+ 
+        
+        Component file1_4 = new File("file1_4", "folder1", 2);
+        folder1.add(file1_4);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // добавляем файлы на диск С
+        
+        
+        // выводим все данные
+        root.print();
+        
+        
         String enterString, realPath = "";
         int command = 3;
 
@@ -66,11 +103,17 @@ class Parser {
         for (int i = 1; i < subStr.length; i++) {
             if (subStr[i].indexOf('.') == -1) {
                 if (isLegalSymbol(subStr[i]) && !isExistElement(subStr[i], subStr[i-1])) {
+                
                     mPath.add(new Directory(subStr[i], subStr[i-1], i));
+                    
+                    //Component file2_1 = new File("file2_1", "folder2", 2);
+                    //folder2.add(file2_1);
                 }
             } else {
                 if (isLegalSymbol(subStr[i]) && !isExistElement(subStr[i], subStr[i-1])) {
                     mPath.add(new File(subStr[i], subStr[i-1], i));
+                    //int j = mPath.indexOf(subStr[i]);
+                    //mPath.get(j-1).add(new File(subStr[i], subStr[i-1], i));
                 }
                 break;
             }
@@ -104,9 +147,6 @@ class Parser {
 }
 
 interface Component {
-
-    
-
     public String getName();
     
     public String getParent();
@@ -114,9 +154,7 @@ interface Component {
     public int getLevel();
 
     public void add(Component component);
-
-    public void remove(Component component);
-
+  
     public void print();
 }
 
@@ -152,14 +190,9 @@ class Directory implements Component {
     }
 
     @Override
-    public void remove(Component component) {
-        components.remove(component);
-    }
-
-    @Override
     public void print() {
-        System.out.println("Узел " + name);
-        System.out.println("Подузлы:");
+        System.out.println(name + "/");
+        System.out.print("  ");
         for (int i = 0; i < components.size(); i++) {
             components.get(i).print();
         }
@@ -193,12 +226,10 @@ class File implements Component {
 
     }
 
-    public void remove(Component component) {
-
-    }
-
     public void print() {
-        System.out.println("Файл " + name);
+        System.out.print("  ");
+        System.out.println(name);
+        System.out.print("  ");
     }
 
 }
