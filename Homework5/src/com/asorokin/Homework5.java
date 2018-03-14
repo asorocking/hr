@@ -1,6 +1,7 @@
 package com.asorokin;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,23 +27,19 @@ class Homework5 {
         
         Component file1_4 = new File("file1_4", "folder1", 2);
         folder1.add(file1_4);
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        // добавляем файлы на диск С
-        
-        
-        // выводим все данные
+      
         root.print();
+        
+      
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         String enterString, realPath = "";
@@ -66,6 +63,7 @@ class Homework5 {
                     Printer.print(realPath);
                     break;
                 case 2:
+                    //Parser.parseTemp(realPath);
                     Parser.parsePath(realPath);
                     break;
             }
@@ -94,16 +92,39 @@ class Parser {
     public static List<Component> mPath = new ArrayList<Component>();
     static String[] subStr;
     static String delimeter = "/";
-
+    static String element = "";
+    public static void parseTemp (String realPath){
+        subStr = realPath.split(delimeter); 
+         
+        for (int i = 0; i < subStr.length; i++) {
+            for (Component m : mPath){
+                if (!subStr[i].equals(m.getName())){
+                    mPath.add(new Directory(subStr[i], subStr[i-1], i));
+                    
+                }
+            }
+        }
+        /*Component root = new Directory("root", "Файловая система", 0);
+        Component folder1 = new Directory("folder1", "root", 1); root.add(folder1);
+        Component folder2 = new Directory("folder2", "root", 1); root.add(folder2);
+        Component file2_1 = new File("file2_1", "folder2", 2); folder2.add(file2_1);
+        Component file1_2 = new File("file1_2", "folder1", 2); folder1.add(file1_2);
+        Component file1_3 = new File("file1_3", "folder1", 2); folder1.add(file1_3);
+        Component file1_1 = new File("file1_1", "folder1", 2); folder1.add(file1_1);
+        Component file1_4 = new File("file1_4", "folder1", 2); folder1.add(file1_4);
+        root.print();*/
+    }
+    
     public static void parsePath(String realPath) {
         subStr = realPath.split(delimeter);
         if (isLegalSymbol(subStr[0]) && !isExistElement(subStr[0], "FileSystem")) {
             mPath.add(new Directory(subStr[0], "FileSystem", 0));
-        }        
+
+        }       
+       
         for (int i = 1; i < subStr.length; i++) {
             if (subStr[i].indexOf('.') == -1) {
                 if (isLegalSymbol(subStr[i]) && !isExistElement(subStr[i], subStr[i-1])) {
-                
                     mPath.add(new Directory(subStr[i], subStr[i-1], i));
                     
                     //Component file2_1 = new File("file2_1", "folder2", 2);
@@ -118,17 +139,23 @@ class Parser {
                 break;
             }
         }
-
         print(mPath);
     }
     
     private static void print(List<Component> mPath) {
+        System.out.println("printAdv():");
         
-        for (int i = 0; i < mPath.size(); i++) 
-            {
-            System.out.println("Вывод из mPath " + mPath.get(i).getLevel() + ": " + mPath.get(i).getParent() + "/" + mPath.get(i).getName());
+        
+        for (int i = 0; i < mPath.size(); i++) {
+            System.out.println(mPath.get(i).getName() + "/");
+            System.out.print("  ");
         }
+        
+        
+        
     }
+    
+   
     
     private static boolean isExistElement(String name, String parent) {
         boolean result = false;
@@ -144,6 +171,7 @@ class Parser {
     private static boolean isLegalSymbol(String str) {
         return str.matches("^[a-zA-Z0-9-_.\\s]+$");
     }
+    
 }
 
 interface Component {
