@@ -12,9 +12,10 @@ class Homework5 {
 
         do {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Введите путь или команды print или close:");
+            System.out.println("Введите путь, команду print или close:");
             enterString = sc.nextLine();
 
+            //Choose command
             if (enterString.equals("print")) {
                 command = 1;
             }
@@ -41,6 +42,7 @@ class Homework5 {
 
 class Printer {
 
+    //prints folder tree
     public static void print(List<Component> mPath) {
         for (int i = 0; i < mPath.size(); i++) {
             System.out.println(mPath.get(i).getName() + "/");
@@ -56,24 +58,37 @@ class Parser {
     static String delimeter = "/";
 
     public static void parsePath(String realPath) {
+        //split path string by /
         subStr = realPath.split(delimeter);
-        if (isLegalSymbol(subStr[0]) && !isExistElement(subStr[0], "FileSystem", 0)) {
+        //check existence and save first component of path
+        if (isLegalSymbol(subStr[0]) && 
+                !isExistElement(subStr[0], "FileSystem", 0)) {
+            //save to arrayList first component with name, 
+            //parent's name and nesting level
             mPath.add(new Component(subStr[0], "FileSystem", 0));
         }
+        //check exist and save other component of path
         for (int i = 1; i < subStr.length; i++) {
+            //for folders
             if (subStr[i].indexOf('.') == -1) {
-                if (isLegalSymbol(subStr[i]) && !isExistElement(subStr[i], subStr[i - 1], i)) {
+                //check for legal symbols and exist
+                if (isLegalSymbol(subStr[i]) && 
+                        !isExistElement(subStr[i], subStr[i - 1], i)) {
                     mPath.add(new Component(subStr[i], subStr[i - 1], i));
                 }
+                //for files
             } else {
-                if (isLegalSymbol(subStr[i]) && !isExistElement(subStr[i], subStr[i - 1], i)) {
+                if (isLegalSymbol(subStr[i]) && 
+                        !isExistElement(subStr[i], subStr[i - 1], i)) {
                     mPath.add(new Component(subStr[i], subStr[i - 1], i));
                 }
+                //exit from loop after first finding of file
                 break;
             }
         }
     }
 
+    //checking for exist
     private static boolean isExistElement(String name, String parent, int i) {
         boolean result = false;
         for (int j = 0; j < mPath.size(); j++) {
@@ -87,6 +102,7 @@ class Parser {
         return result;
     }
 
+    //checking for legal symbols
     private static boolean isLegalSymbol(String str) {
         return str.matches("^[a-zA-Z0-9-_.\\s]+$");
     }
@@ -116,5 +132,3 @@ class Component {
         return level;
     }
 }
-
-
