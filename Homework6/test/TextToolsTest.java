@@ -65,38 +65,19 @@ public class TextToolsTest {
         List<String> result = TextTools.deleteRepeats(words);
         assertFalse(expResult == result);
     }
-
+    
     @Test
-    public void testPrepareText() {
-        System.out.println("prepareText");
-        String text = "";
-        String expResult = "";
-        String result = TextTools.prepareText(text);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    @Test
-    public void testDeleteRepeats() {
+    public void testDeleteRepeatsCrazyCrazyAngels() {
         System.out.println("deleteRepeats");
-        List<String> words = null;
-        List<String> expResult = null;
+        List<String> words = new ArrayList<String>();
+        words.add("crazy");
+        words.add("crazy");
+        words.add("angels");
+        List<String> expResult = new ArrayList<String>();
+        expResult.add("crazy");
+        expResult.add("angels");
         List<String> result = TextTools.deleteRepeats(words);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    @Test
-    public void testDivideByAlphabet() {
-        System.out.println("divideByAlphabet");
-        List<String> words = null;
-        TextTools.divideByAlphabet(words);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-   
-
+    
 }

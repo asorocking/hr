@@ -22,7 +22,7 @@ public class Homework6 {
         //Cast text to lower case and remove all not symbols and 
         //not white-spaces
         text = TextTools.prepareText(text);
-        
+       
 
         //Spliting text to single words by white-space
         words = TextTools.splitText(text);
