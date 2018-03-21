@@ -1,3 +1,5 @@
+package com.sorokin;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +12,12 @@
  */
 public class StringValidator implements Validator{
     @Override
-    public void validate(String line){
+    public String validate(String line){
         if (line.matches("^([A-Z][a-z]+)")) {
             System.out.println(line + " is valid line");
         } else {
             System.out.println(line + " is invalid line");
         }
+        return line;
     }
 }

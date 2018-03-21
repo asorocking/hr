@@ -1,3 +1,5 @@
+package com.sorokin;
+
 
 import java.util.Scanner;
 

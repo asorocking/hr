@@ -1,10 +1,18 @@
+package com.sorokin;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
+import com.sorokin.ValidationFailedException;
+import com.sorokin.ValidatorFactory;
+import com.sorokin.ChooserData;
+import static com.sorokin.Homework7.createValidatorBySpecialty;
+import com.sorokin.Validator;
 import org.junit.After;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,125 +21,160 @@ import org.junit.Test;
  * @author Samsung
  */
 public class Homework7Test {
-
-    public Homework7Test() {
-    }
     
-    @Before
-    public void setUp(){
-        
-        
-    }
-    
-
-    @After
-    public void tearDown() {
-    }
-    @Before
-    static ValidatorFactory createValidatorBySpecialty(String specialty) throws ValidationFailedException {
-        if (specialty.equalsIgnoreCase("int")) {
-            return new IntValidatorFactory();
-        } else if (specialty.equalsIgnoreCase("string")) {
-            return new StringValidatorFactory();
-        } else {
-            throw new ValidationFailedException(specialty + " is unknown specialty ");
-        }
-    }
     @Test
-    public void testValidateInt() throws ValidationFailedException {
-        String line = "";
-
+    public void testValidator_Int_1() throws ValidationFailedException {
+        String line = "1";
         String validatorType = "";
 
         validatorType = ChooserData.chooseData(line);
         ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
         Validator validator = validatorFactory.createValidator();
-        validator.validate(line);
-        validator.validate("1");
+        
+        String expResult = "1";
+        String result = validator.validate(line);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testValidator_Int_5() throws ValidationFailedException {
+        String line = "5";
+        String validatorType = "";
 
-        validator.validate("5");
+        validatorType = ChooserData.chooseData(line);
+        ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
+        Validator validator = validatorFactory.createValidator();
+        
+        String expResult = "5";
+        String result = validator.validate(line);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testValidator_Int_10() throws ValidationFailedException {
+        String line = "10";
+        String validatorType = "";
 
-        validator.validate("10");
-
+        validatorType = ChooserData.chooseData(line);
+        ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
+        Validator validator = validatorFactory.createValidator();
+        
+        String expResult = "10";
+        String result = validator.validate(line);
+        assertEquals(expResult, result);
     }
 
-    @Test (expected = ValidationFailedException.class)
-    public void testValidateIntFails() throws ValidationFailedException {
-        String line = "";
+    @Test
+    public void testValidate_String_Hello() throws ValidationFailedException {
+        String line = "Hello";
 
         String validatorType = "";
 
         validatorType = ChooserData.chooseData(line);
         ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
         Validator validator = validatorFactory.createValidator();
-        validator.validate(line);
-        validator.validate("11");
+        
+        String expResult = "Hello";
+        String result = validator.validate(line);
+        assertEquals(expResult, result);
+    }
 
+    @Test
+    public void testValidate_String_hello() throws ValidationFailedException {
+        String line = "hello";
+        String validatorType = "";
+
+        validatorType = ChooserData.chooseData(line);
+        ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
+        Validator validator = validatorFactory.createValidator();
+        
+        String expResult = "hello";
+        String result = validator.validate(line);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testChooserData_Int() throws ValidationFailedException {
+        String line = "1";
+        String validatorType = "";
+
+        validatorType = ChooserData.chooseData(line);
+
+        String expResult = "int";
+        String result = ChooserData.chooseData(line);
+        assertEquals(expResult, result);
+
+    }
+    
+    @Test
+    public void testChooserData_String() throws ValidationFailedException {
+        String line = "hello";
+        String validatorType = "";
+
+        validatorType = ChooserData.chooseData(line);
+
+        String expResult = "string";
+        String result = ChooserData.chooseData(line);
+        assertEquals(expResult, result);
+    }
+    
+    @Test (expected = ValidationFailedException.class)
+    public void testValidateIntFails1() throws ValidationFailedException {
+        String line = "e3e3";
+        String validatorType = "";
+
+        validatorType = ChooserData.chooseData(line);
+        ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
+        Validator validator = validatorFactory.createValidator();
+                
+        validator.validate(line);
     }
 
     @Test(expected = ValidationFailedException.class)
-
     public void testValidateIntFails2() throws ValidationFailedException {
-String line = "";
-
+        String line = "3e3e";
         String validatorType = "";
 
         validatorType = ChooserData.chooseData(line);
         ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
         Validator validator = validatorFactory.createValidator();
+        
         validator.validate(line);
-        validator.validate("0");
-
     }
 
-    @Test
-
-    public void testValidateString() throws ValidationFailedException {
-String line = "";
-
+    @Test(expected = ValidationFailedException.class)
+    public void testValidateIntFails3() throws ValidationFailedException {
+        String line = "";
         String validatorType = "";
 
         validatorType = ChooserData.chooseData(line);
         ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
         Validator validator = validatorFactory.createValidator();
-        validator.validate(line);
         
-        validator.validate("Hello");
-        validator.validate("Hello world, abc");
-}
+        validator.validate(line);
+    }
 
-
-
-
-@Test(expected = ValidationFailedException.class)
-
-    public void testValidateStringFails() throws ValidationFailedException {
-
- String line = "";
-
+    @Test(expected = ValidationFailedException.class)
+    public void testValidateStringFails1() throws ValidationFailedException {
+        String line = "Hello world, abc";
         String validatorType = "";
 
         validatorType = ChooserData.chooseData(line);
         ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
         Validator validator = validatorFactory.createValidator();
+        
         validator.validate(line);
-        validator.validate("hello");
-}
+    }
 
-
-
-
-@Test(expected = ValidationFailedException.class)
-
-    public void testValidateStringFails2() throws ValidationFailedException {
-String line = "";
-
+    @Test(expected = ValidationFailedException.class)
+    public void testValidateStringFails3() throws ValidationFailedException {
+        String line = "";
         String validatorType = "";
 
         validatorType = ChooserData.chooseData(line);
         ValidatorFactory validatorFactory = createValidatorBySpecialty(validatorType);
         Validator validator = validatorFactory.createValidator();
+
         validator.validate(line);
-        validator.validate("");
-}
+    }
 }
