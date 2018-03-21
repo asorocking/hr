@@ -14,7 +14,7 @@ public class StringValidator implements Validator{
         if (line.matches("^([A-Z][a-z]+)")) {
             System.out.println(line + " is valid line");
         } else {
-        System.out.println(line + " is invalid line");
+            System.out.println(line + " is invalid line");
         }
     }
 }

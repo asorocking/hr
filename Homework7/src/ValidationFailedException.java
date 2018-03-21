@@ -11,7 +11,7 @@
 public class ValidationFailedException extends Exception {
 
     public ValidationFailedException(String string) {
-        
+        super(string);
     }
     
 }

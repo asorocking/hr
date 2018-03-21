@@ -15,7 +15,7 @@ public class IntValidator implements Validator{
         if (number > 0 && number < 11) {
             System.out.println(number + " is valid number");
         } else {
-        System.out.println(number + " is invalid number");
+            System.out.println(number + " is invalid number");
         }
     }
 }
