@@ -1,54 +1,65 @@
 package com.asorokin;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import com.asorokin.OutOfBoundException;
 
-public class LimitedList<E> implements List<E> {
+public class LimitedList<E> extends ArrayList<E> {
 
-    private int size = 0;
+    private int limit = 0;
     private int numbersOfElements = 0;
     Object[] elements = {};
     Object[] temp = {};
 
-    public LimitedList(int size) {
-        this.elements = new Object[size];
-        this.size = size;
+    public LimitedList(int limit) {
+        this.elements = new Object[limit];
+        this.limit = limit;
     }
 
-    //MY
+    public int getLimit() {
+        return limit;
+    }
+
     @Override
-    public E get(int index) {
+    public E get(int index) throws OutOfBoundException {
+        if (index >= limit) {
+            throw new OutOfBoundException();
+        }
         return (E) elements[index];
     }
 
-    //MY
     @Override
-    public boolean add(E element) {
-        boolean result = false;
-        if (numbersOfElements <= size) {
-            elements[numbersOfElements] = element;
-            numbersOfElements++;
-            result = true;
+    public boolean add(E element) throws OutOfBoundException {
+        if (numbersOfElements >= limit) {
+            throw new OutOfBoundException();
         }
+        boolean result = false;
+        elements[numbersOfElements] = element;
+        numbersOfElements++;
+        result = true;
+
         return result;
     }
 
-    //MY
     @Override
     public void add(int index, E element) {
-        if (numbersOfElements <= size) {
-            elements[index] = element;
+
+        if (numbersOfElements <= limit) {
+            try {
+                elements[index] = element;
+            } catch (OutOfBoundException e) {
+                System.out.println("OutOfArrayBounfException");
+            }
             numbersOfElements++;
         }
     }
 
-    //MY
     @Override
     public int size() {
         int result = 0;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < limit; i++) {
             if (elements[i] != null) {
                 result++;
             }
@@ -56,11 +67,10 @@ public class LimitedList<E> implements List<E> {
         return result;
     }
 
-    //MY
     @Override
     public boolean isEmpty() {
         boolean result = true;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < limit; i++) {
             if (elements[i] != null) {
                 result = false;
             }
@@ -68,11 +78,10 @@ public class LimitedList<E> implements List<E> {
         return result;
     }
 
-    //MY
     @Override
     public int indexOf(Object o) {
         int result = -1;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < limit; i++) {
             if (elements[i] == o) {
                 result = i;
             }
@@ -80,11 +89,10 @@ public class LimitedList<E> implements List<E> {
         return result;
     }
 
-    //MY
     @Override
     public boolean contains(Object o) {
         boolean result = false;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < limit; i++) {
             if (elements[i] == (o)) {
                 result = true;
             }
@@ -92,7 +100,6 @@ public class LimitedList<E> implements List<E> {
         return result;
     }
 
-    //MY
     @Override
     public Iterator<E> iterator() {
         Iterator<E> it = new Iterator<E>() {
@@ -101,7 +108,7 @@ public class LimitedList<E> implements List<E> {
 
             @Override
             public boolean hasNext() {
-                return currentIndex < size && elements[currentIndex] != null;
+                return currentIndex < limit && elements[currentIndex] != null;
             }
 
             @Override
@@ -116,7 +123,6 @@ public class LimitedList<E> implements List<E> {
         };
         return it;
     }
-//MY
 
     @Override
     public Object[] toArray() {
@@ -127,7 +133,6 @@ public class LimitedList<E> implements List<E> {
         return obj;
     }
 
-//MY
     @Override
     public <T> T[] toArray(T[] a) {
         T[] t = (T[]) new Object[size()];
@@ -137,7 +142,6 @@ public class LimitedList<E> implements List<E> {
         return t;
     }
 
-//MY
     @Override
     public boolean remove(Object o) {
         boolean result = false;
@@ -148,13 +152,63 @@ public class LimitedList<E> implements List<E> {
                     elements[j] = elements[j + 1];
                 }
                 result = true;
+                numbersOfElements--;
                 break;
             }
         }
         return result;
     }
 
-    
+    @Override
+    public void clear() {
+        for (int i = 0; i < limit; i++) {
+            elements[i] = null;
+        }
+        numbersOfElements = 0;
+    }
+
+    @Override
+    public E set(int index, E element) {
+        Object oldElement = elements[index];
+        elements[index] = element;
+        return (E) oldElement;
+    }
+
+    @Override
+    public E remove(int index) throws OutOfBoundException {
+        if (index >= limit) {
+            throw new OutOfBoundException();
+        }
+        E result = (E) elements[index];
+        for (int i = index; i < size(); i++) {
+            elements[i] = elements[i + 1];
+        }
+        numbersOfElements--;
+        return result;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        int result = -1;
+        for (int i = limit - 1; i >= 0; i--) {
+            if (elements[i] == o) {
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<E> subList(int fromIndex, int toIndex) {
+        List<E> list = new LimitedList<E>(toIndex - fromIndex + 1);
+        for (int i = fromIndex; i < toIndex + 1; i++) {
+            list.add((E) elements[i]);
+        }
+        return list;
+    }
+
+    /* Don't implements methods
     @Override
     public boolean containsAll(Collection<?> c) {
         return false;
@@ -179,38 +233,8 @@ public class LimitedList<E> implements List<E> {
     public boolean retainAll(Collection<?> c) {
         return false;
     }
-
-    @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public E set(int index, E previous) {
-        return null;
-    }
-//MY
-    @Override
-    public E remove(int index) {
-        E result = (E) elements[index];;
-        for (int i = index; i < size(); i++) {
-            elements[i] = elements[i + 1];
-        }
-        return result;
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        int result = -1;
-        for (int i = size - 1; i >= 0 ; i--) {
-            if (elements[i] == o) {
-                result = i;
-            }
-        }
-        return result;
-    }
-
-    @Override
+    
+        @Override
     public ListIterator<E> listIterator() {
         return null;
     }
@@ -219,18 +243,5 @@ public class LimitedList<E> implements List<E> {
     public ListIterator<E> listIterator(int index) {
         return null;
     }
-//MY
-    @Override
-    public List<E> subList(int fromIndex, int toIndex) {
-        List<E> list = new LimitedList<E>(toIndex - fromIndex + 1);
-        for (int i = fromIndex; i < toIndex + 1; i++) {
-            list.add((E) elements[i]);
-        }
-        return list;
-    }
-
-    //MY
-    public void setSize(int size) {
-        this.size = size;
-    }
+     */
 }
