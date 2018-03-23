@@ -44,11 +44,11 @@ public class Calculator {
         checkWorkerList.add(new Require(WorkersEnum.CONCRETER, concreter));
         checkWorkerList.add(new Require(WorkersEnum.ELECTRICIAN, electrician));
         checkWorkerList.add(new Require(WorkersEnum.FINISHER, finisher));    
-        System.out.println("engineer = " + engineer);
+        /*System.out.println("engineer = " + engineer);
         System.out.println("builder = " + builder);
         System.out.println("concreter = " + concreter);
         System.out.println("electrician = " + electrician);
-        System.out.println("finisher = " + finisher);
+        System.out.println("finisher = " + finisher);*/
         return checkWorkerList;
     }
 

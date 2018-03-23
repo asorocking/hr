@@ -1,14 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.asorokin;
 
-/**
- *
- * @author sorokin
- */
-public class CompanyFour {
+import java.util.ArrayList;
+import java.util.List;
+
+class CompanyFour{
+    private static final int PRICE = 50;
+    private static final String companyName = "COMPANY FOUR";
     
+    List<Worker> companyFourWorkerList = new ArrayList<Worker>();
+    
+    public CompanyFour(){
+    }
+    
+    public CompanyFour(Worker worker){
+        companyFourWorkerList.add(worker);
+    }
+    
+    public String getCompanyName(){
+        return companyName;
+    }
+    
+    public int getPrice() {
+        return PRICE;
+    }    
+    
+    public void print(List<CompanyFour> companyFourList) {
+        System.out.println("Company Four. Our price is " + PRICE + "$. We have:");
+        for (Worker ctwl : companyFourWorkerList) {
+            System.out.println(ctwl);
+        }
+    }
 }

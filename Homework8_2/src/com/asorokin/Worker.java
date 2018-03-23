@@ -5,7 +5,7 @@ import java.util.List;
 class Worker {
     String workerName;
     WorkersEnum[] workerTitle = new WorkersEnum[5];
-    
+
     public Worker(){
     }
     
@@ -21,9 +21,8 @@ class Worker {
     public WorkersEnum[] getWorkerTitle(){
         return workerTitle;
     }
-    
+      
     public void print(List<Worker> workerList) {
-        System.out.println("WorkersEnum:");
         for (Worker w : workerList) {
             System.out.print(w.workerName + ": ");
             for (WorkersEnum wt : w.workerTitle) {

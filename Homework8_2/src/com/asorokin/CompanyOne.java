@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 class CompanyOne{
-    public static final int PRICE = 200;
+    private static final int PRICE = 100;
+    private static final String companyName = "COMPANY ONE";
     
     List<Worker> companyOneWorkerList = new ArrayList<Worker>();
     
     public CompanyOne(){
     }
-    
+           
     public CompanyOne(Worker worker){
         companyOneWorkerList.add(worker);
+    }
+    
+    public String getCompanyName(){
+        return companyName;
     }
     
     public int getPrice() {
