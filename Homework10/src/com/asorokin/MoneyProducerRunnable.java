@@ -5,32 +5,39 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 public class MoneyProducerRunnable implements Runnable {
 
     Card card;
 
+    Random r = new Random();
+
     public MoneyProducerRunnable(Card card) {
         this.card = card;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
-        run();
-    }
-
     @Override
     public void run() {
-
-        int balance = card.getBalance();
-        if (balance > 0 && balance <= 990) {
-            synchronized (this) {
-                Thread t = Thread.currentThread();
-                card.setBalance(balance + 10);
-                System.out.println(t.getName() + ": баланс после завершения операции: " + card.getBalance());
-            }
+        while (card.getBalance() > 0 && card.getBalance() < 1000 && card.flag) {
+            card.increaseBalance();
+            System.out.println(Thread.currentThread().getName() + ": баланс после завершения операции: " + card.getBalance());
             try {
-                Thread.sleep(200);
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(Thread.currentThread().getName() + " завершен.");
+        /*
+        if (card.getBalance() > 0 && card.getBalance() < 1000) {
+        
+                //Thread t = Thread.currentThread();
+                card.increaseBalance();
+                System.out.println(Thread.currentThread().getName() + ": баланс после завершения операции: " + card.getBalance());
+            
+            try {
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -38,6 +45,6 @@ public class MoneyProducerRunnable implements Runnable {
         } else {
             System.out.println(Thread.currentThread().getName() + " завершен.");
         }
-
+         */
     }
 }
