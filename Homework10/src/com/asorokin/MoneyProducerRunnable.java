@@ -1,10 +1,5 @@
 package com.asorokin;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Random;
 
 public class MoneyProducerRunnable implements Runnable {
@@ -19,12 +14,8 @@ public class MoneyProducerRunnable implements Runnable {
 
     @Override
     public void run() {
-        while (card.getBalance() > 0 && card.getBalance() < 1000 && card.flag) {
-            synchronized (card) {
-                System.out.println(Thread.currentThread().getName() + ": начинаю операцию пополнения. Баланс до:" + card.getBalance());
-                card.increaseBalance();
-                System.out.println(Thread.currentThread().getName() + ": баланс после завершения операции: " + card.getBalance());
-            }
+        while (card.flag && card.getBalance() <= 1000) {
+            card.increaseBalance();
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -32,6 +23,5 @@ public class MoneyProducerRunnable implements Runnable {
             }
         }
         System.out.println(Thread.currentThread().getName() + " завершен.");
-        
     }
 }
