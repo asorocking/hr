@@ -12,7 +12,7 @@ import java.util.Random;
  * @author sorokin
  */
 public class Card {
-//
+
     private static int balance = 500;
     static boolean flag = true;
     private static int diff = 0;
@@ -26,28 +26,30 @@ public class Card {
     public synchronized static void increaseBalance() {
         diff = 5 + r.nextInt(6);
         balance += diff;
-        System.out.println(Thread.currentThread().getName() + ": пополнение на "
-                + diff + ". Баланс после операции " + balance);
+        System.out.println(Thread.currentThread().getName() + ": "
+                + "пополнение на " + diff + ". Текущий баланс " + balance);
     }
 
     public synchronized static void decreaseBalance() {
         diff = 5 + r.nextInt(6);
         if (balance - diff >= 0) {
             balance -= diff;
-            System.out.println(Thread.currentThread().getName() + ": снятие "
-                    + diff + ". Баланс после операции " + balance);
+
+            System.out.println(Thread.currentThread().getName() + ": "
+                + "снятие " + diff + ". Текущий баланс " + balance);
         } else {
             int tmp = balance;
             balance = 0;
-            System.out.println(Thread.currentThread().getName() + ": попытка "
-                    + "снять " + diff + ". Снято " + tmp + ". Баланс после "
-                    + "операции " + balance);
+            System.out.println(Thread.currentThread().getName() + ": "
+                + "пытался снять " + diff + ". Снял последние " + tmp 
+                + ". Текущий баланс " + balance);
             flag = false;
         }
 
     }
 
-    public static synchronized int getBalance() {
+
+    public synchronized static int getBalance() {
         return balance;
     }
 }

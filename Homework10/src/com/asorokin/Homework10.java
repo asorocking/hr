@@ -14,6 +14,7 @@ public class Homework10 {
 
         Random r = new Random();
 
+        
         Thread[] tp = new Thread[5];
         for (i = 0; i < (3 + r.nextInt(3)); i++) {
             tp[i] = new Thread(mpr, "MoneyProducer-" + i);
