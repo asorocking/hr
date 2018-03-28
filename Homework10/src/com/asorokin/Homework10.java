@@ -15,7 +15,7 @@ public class Homework10 {
         Random r = new Random();
 
         Thread[] tp = new Thread[5];
-        for (i = 0; i < (4 + r.nextInt(2)); i++) {
+        for (i = 0; i < (3 + r.nextInt(3)); i++) {
             tp[i] = new Thread(mpr, "MoneyProducer-" + i);
         }
 
@@ -25,7 +25,7 @@ public class Homework10 {
         }
 
         Thread[] tc = new Thread[5];
-        for (i = 0; i < (4 + r.nextInt(2)); i++) {
+        for (i = 0; i < (3 + r.nextInt(3)); i++) {
             tc[i] = new Thread(mcr, "MoneyConsumer-" + i);
         }
 
