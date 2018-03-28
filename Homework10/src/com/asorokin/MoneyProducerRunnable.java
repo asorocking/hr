@@ -3,7 +3,7 @@ package com.asorokin;
 import java.util.Random;
 
 public class MoneyProducerRunnable implements Runnable {
-
+//
     Card card;
 
     Random r = new Random();

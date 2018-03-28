@@ -26,3 +26,4 @@ public class MoneyConsumerRunnable implements Runnable {
     }
 
 }
+//

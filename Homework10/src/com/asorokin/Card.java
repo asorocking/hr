@@ -12,7 +12,7 @@ import java.util.Random;
  * @author sorokin
  */
 public class Card {
-
+//
     private static int balance = 500;
     static boolean flag = true;
     private static int diff = 0;

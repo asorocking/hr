@@ -3,7 +3,7 @@ package com.asorokin;
 import java.util.Random;
 
 public class Homework10 {
-
+//
     public static void main(String[] args) {
         Card card = new Card();
         System.out.println("Начальный баланс: " +card.getBalance());
