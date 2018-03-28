@@ -13,41 +13,41 @@ import java.util.Random;
  */
 public class Card {
 
-    private int balance = 500;
+    private static int balance = 500;
     static boolean flag = true;
-    private int diff = 0;
+    private static int diff = 0;
 
     public Card() {
 
     }
 
-    Random r = new Random();
+    static Random r = new Random();
 
-    public synchronized void increaseBalance() {
-        balance += 5 + r.nextInt(6);
+    public synchronized static void increaseBalance() {
+        diff = 5 + r.nextInt(6);
+        balance += diff;
+        System.out.println(Thread.currentThread().getName() + ": "
+                + "пополнение на " + diff + ". Текущий баланс " + balance);
     }
 
-    public synchronized void decreaseBalance() {
+    public synchronized static void decreaseBalance() {
         diff = 5 + r.nextInt(6);
-
         if (balance - diff >= 0) {
             balance -= diff;
+            System.out.println(Thread.currentThread().getName() + ": "
+                + "снятие " + diff + ". Текущий баланс " + balance);
         } else {
-            if (balance - 5 >= 0) {
-                balance -= 5;
-            }
+            int tmp = balance;
+            balance = 0;
+            System.out.println(Thread.currentThread().getName() + ": "
+                + "пытался снять " + diff + ". Снял последние " + tmp 
+                + ". Текущий баланс " + balance);
             flag = false;
         }
-            
-            
-            
+
     }
 
-    public void setBalance(int amount) {
-        balance = amount;
-    }
-
-    public int getBalance() {
+    public synchronized static int getBalance() {
         return balance;
     }
 }
