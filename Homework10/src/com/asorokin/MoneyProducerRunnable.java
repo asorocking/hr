@@ -20,8 +20,11 @@ public class MoneyProducerRunnable implements Runnable {
     @Override
     public void run() {
         while (card.getBalance() > 0 && card.getBalance() < 1000 && card.flag) {
-            card.increaseBalance();
-            System.out.println(Thread.currentThread().getName() + ": баланс после завершения операции: " + card.getBalance());
+            synchronized (card) {
+                System.out.println(Thread.currentThread().getName() + ": начинаю операцию пополнения. Баланс до:" + card.getBalance());
+                card.increaseBalance();
+                System.out.println(Thread.currentThread().getName() + ": баланс после завершения операции: " + card.getBalance());
+            }
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -29,22 +32,6 @@ public class MoneyProducerRunnable implements Runnable {
             }
         }
         System.out.println(Thread.currentThread().getName() + " завершен.");
-        /*
-        if (card.getBalance() > 0 && card.getBalance() < 1000) {
         
-                //Thread t = Thread.currentThread();
-                card.increaseBalance();
-                System.out.println(Thread.currentThread().getName() + ": баланс после завершения операции: " + card.getBalance());
-            
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            run();
-        } else {
-            System.out.println(Thread.currentThread().getName() + " завершен.");
-        }
-         */
     }
 }
