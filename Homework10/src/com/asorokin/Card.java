@@ -40,7 +40,7 @@ public class Card {
             int tmp = balance;
             balance = 0;
             System.out.println(Thread.currentThread().getName() + ": попытка "
-                    + "снять " + diff + ". Снято " + tmp + " Баланс после "
+                    + "снять " + diff + ". Снято " + tmp + ". Баланс после "
                     + "операции " + balance);
             flag = false;
         }
