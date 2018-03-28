@@ -14,7 +14,7 @@ public class MoneyConsumerRunnable implements Runnable {
 
     @Override
     public void run() {
-        while (card.flag && card.getBalance() > 0) {
+        while (card.getBalance() > 0 && card.getBalance() < 1000 && card.flag) {
             card.decreaseBalance();
         }
         try {

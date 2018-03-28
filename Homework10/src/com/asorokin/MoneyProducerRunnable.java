@@ -14,7 +14,7 @@ public class MoneyProducerRunnable implements Runnable {
 
     @Override
     public void run() {
-        while (card.flag && card.getBalance() <= 1000) {
+        while (card.getBalance() > 0 && card.getBalance() < 1000 && card.flag) {
             card.increaseBalance();
             try {
                 Thread.sleep(10);
