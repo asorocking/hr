@@ -16,11 +16,12 @@ class Homework11 {
             File file = new File("fileSystem.txt");
             if (file.exists()) {
                 Parser.mPath = FileToPath.fileToPath();
+                System.out.println("Скопировали из файла fileSystem.txt");
             }
         } catch (FileNotFoundException e) {
             System.out.println("Saved file system not found");
         }
-        
+
         do {
             Scanner sc = new Scanner(System.in);
             System.out.println("Введите путь, команду print или close:");
@@ -41,15 +42,12 @@ class Homework11 {
             switch (command) {
                 case 1:
                     Printer.print(Parser.mPath);
-                    System.out.println("Зашли в case 1");
                     break;
                 case 2:
                     Parser.parsePath(realPath);
-                    System.out.println("Зашли в case 2");
                     break;
                 case 3:
-                    PathToFile.pathToFile(Parser.newPath);
-                    System.out.println("Зашли в case 3");
+                    PathToFile.pathToFile(Parser.mPath);
                     break;
             }
         } while (!enterString.equals("close"));
@@ -61,15 +59,12 @@ class Printer {
 
     //prints folder tree
     public static void print(List<Component> mPath) throws FileNotFoundException {
-        //check fileSystem.txt for avaiable
-        File file = new File("fileSystem.txt");
-        if (mPath.isEmpty() && file.exists()) {
-            mPath = FileToPath.fileToPath();
-        }
 
-        for (int i = 0; i < mPath.size(); i++) {
-            System.out.println(mPath.get(i).getName() + "/");
-            System.out.print("  ");
+        if (!mPath.isEmpty()) {
+            for (int i = 0; i < mPath.size(); i++) {
+                System.out.println(mPath.get(i).getName() + "/");
+                System.out.print("  ");
+            }
         }
     }
 }
@@ -77,7 +72,6 @@ class Printer {
 class Parser {
 
     public static List<Component> mPath = new ArrayList<Component>();
-    public static List<Component> newPath = new ArrayList<Component>();
     static String[] subStr;
     static String delimeter = "/";
 
@@ -89,7 +83,7 @@ class Parser {
                 && !isExistElement(subStr[0], "FileSystem", 0)) {
             //save to arrayList first component with name, 
             //parent's name and nesting level
-            newPath.add(new Component(subStr[0], "FileSystem", 0));
+            mPath.add(new Component(subStr[0], "FileSystem", 0));
         }
         //check exist and save other component of path
         for (int i = 1; i < subStr.length; i++) {
@@ -98,13 +92,13 @@ class Parser {
                 //check for legal symbols and exist
                 if (isLegalSymbol(subStr[i])
                         && !isExistElement(subStr[i], subStr[i - 1], i)) {
-                    newPath.add(new Component(subStr[i], subStr[i - 1], i));
+                    mPath.add(new Component(subStr[i], subStr[i - 1], i));
                 }
                 //for files
             } else {
                 if (isLegalSymbol(subStr[i])
                         && !isExistElement(subStr[i], subStr[i - 1], i)) {
-                    newPath.add(new Component(subStr[i], subStr[i - 1], i));
+                    mPath.add(new Component(subStr[i], subStr[i - 1], i));
                 }
                 //exit from loop after first finding of file
                 break;
