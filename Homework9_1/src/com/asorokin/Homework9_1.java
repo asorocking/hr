@@ -19,10 +19,12 @@ public class Homework9_1 implements Comparator<Integer> {
     public static Integer[] sort(Integer[] massive) {
         Arrays.sort(massive, new Comparator<Integer>() {
             @Override
-            public int compare(Integer a, Integer b) {
-                Integer summ1 = 0;
-                Integer summ2 = 0;
-
+            public int compare(Integer o1, Integer o2) {
+                int summ1 = 0;
+                int summ2 = 0;
+                int a = (int) o1;
+                int b = (int) o2;
+                
                 if (a < 0) {
                     a *= -1;
                 }
@@ -40,7 +42,10 @@ public class Homework9_1 implements Comparator<Integer> {
                         b %= d;
                     }
                 }
-                return summ1.compareTo(summ2);
+                
+                Integer res1 = Integer.valueOf(summ1);
+                Integer res2 = Integer.valueOf(summ2);
+                return res1.compareTo(res2);
             }
         });
         return massive;
