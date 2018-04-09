@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.asorokin;
 
 import static com.asorokin.ParserJSON.parseJSON;
@@ -39,5 +34,17 @@ public class ArticleServiceByHttpClientTest {
         String result = json.get("Article");
         assertEquals(expResult, result);
     }
+    
+    @Test
+    public void testUploadToServer() {
+        System.out.println("ArticleServiceByHttpClient");
+        int id = 101;
+        ArticleServiceByHttpClient articleServiceByHttpClient = new ArticleServiceByHttpClient();
+        String expResult = "101";
+        Map<String, String> json = parseJSON(articleServiceByHttpClient.uploadToServer(id));
+        String result = json.get("Article");
+        assertEquals(expResult, result);
+    }
 
 }
+

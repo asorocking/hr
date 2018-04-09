@@ -10,7 +10,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId> 
                 <artifactId>maven-jar-plugin</artifactId> 
-                <version>2.4</version> 
+                <version>${maven-jar-plugin.version}</version> 
                 <configuration>
                     <archive>
                         <manifest>
@@ -22,7 +22,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>1.6</version>
+                <version>${maven-shade-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -39,49 +39,42 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
+        <maven-shade-plugin.version>1.6</maven-shade-plugin.version>
+        <junit.version>4.10</junit.version>
+        <json.version>20140107</json.version>
+        <json-simple.version>1.1.1</json-simple.version>
+        <commons-io.version>2.4</commons-io.version>
+        <http.client.version>4.5.5</http.client.version>
+
     </properties>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId> 
-            <artifactId>maven-jar-plugin</artifactId> 
-            <version>2.4</version> 
+            <version>${junit.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20140107</version> 
+            <version>${json.version}</version> 
         </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy</artifactId>
-            <version>1.8.3</version>
-            <type>jar</type>
-        </dependency>
-      
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
+            <version>${json-simple.version}</version>
         </dependency>
-
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.5</version>
+            <version>${http.client.version}</version>
             <type>jar</type>
         </dependency>
-
     </dependencies>
 
     <name>Homework14</name>

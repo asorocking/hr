@@ -30,5 +30,16 @@ public class ArticleServiceByHttpURLConnectionTest {
         String result = json.get("Article");
         assertEquals(expResult, result);
     }
+    
+    @Test
+    public void testUploadToServer() {
+        System.out.println("ArticleServiceByHttpURLConnection");
+        int id = 101;
+        ArticleServiceByHttpURLConnection articleServiceByHttpURLConnection = new ArticleServiceByHttpURLConnection();
+        String expResult = "101";
+        Map<String, String> json = parseJSON(articleServiceByHttpURLConnection.uploadToServer(id));
+        String result = json.get("Article");
+        assertEquals(expResult, result);
+    }
 
 }

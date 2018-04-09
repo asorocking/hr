@@ -14,7 +14,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 public class ArticleServiceByHttpClient implements ArticleService {
-    
+    private final static String URL = "https://jsonplaceholder.typicode.com/posts/";
     public ArticleServiceByHttpClient(){
     
     }
@@ -24,7 +24,7 @@ public class ArticleServiceByHttpClient implements ArticleService {
         String result = "";
         try {
             CloseableHttpClient httpclient = HttpClients.createDefault();
-            HttpGet httpget = new HttpGet("https://jsonplaceholder.typicode.com/posts/" + id);
+            HttpGet httpget = new HttpGet(URL + id);
             CloseableHttpResponse response = httpclient.execute(httpget);
 
             HttpEntity entity = response.getEntity();
@@ -42,13 +42,22 @@ public class ArticleServiceByHttpClient implements ArticleService {
     @Override
     public String uploadToServer(int id) {
         String result;
+        //StringEntity params;
+        String jsonString;
         HttpClient httpClient = HttpClientBuilder.create().build();
         try {
-            HttpPost httppost = new HttpPost("https://jsonplaceholder.typicode.com/posts");
-            StringEntity params = new StringEntity("{\"userId\": 1,\n"
+            HttpPost httppost = new HttpPost(URL);
+            System.out.println("Output from Server .... \n");
+            
+            
+            jsonString = BuildJsonString.createJsonString(id);
+           // StringEntity params = new StringEntity(jsonString);
+            
+             StringEntity params = new StringEntity("{\"userId\": 1,\n"
                     + "\"id\":" + id + ",\n"
                     + "\"title\": \"some title\",\n"
                     + "\"body\": \"some message\"}");
+            
             httppost.addHeader("content-type", "application/json");
             httppost.setEntity(params);
             HttpResponse response = httpClient.execute(httppost);

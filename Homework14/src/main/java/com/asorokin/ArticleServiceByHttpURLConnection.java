@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ArticleServiceByHttpURLConnection implements ArticleService{
+    private final static String URL = "https://jsonplaceholder.typicode.com/posts/";
 
     public ArticleServiceByHttpURLConnection(){
         
@@ -17,7 +18,7 @@ public class ArticleServiceByHttpURLConnection implements ArticleService{
     @Override
     public String getJSON(int id) {
          try {
-            URL url = new URL("https://jsonplaceholder.typicode.com/posts/" + id);
+            URL url = new URL(URL + id);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             
             con.setRequestMethod("GET");
@@ -50,7 +51,7 @@ public class ArticleServiceByHttpURLConnection implements ArticleService{
     public String uploadToServer(int id) {
         String result = "";
         try {
-            URL url = new URL("https://jsonplaceholder.typicode.com/posts");
+            URL url = new URL(URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
