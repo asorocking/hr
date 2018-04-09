@@ -1,7 +1,6 @@
 package com.asorokin;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -32,10 +31,7 @@ public class ArticleServiceStarter {
             result = ParserJSON.parseJSON(resultJson);
         }
         
-        for(Map.Entry<String, String> item : result.entrySet()){
-        //Article [1]: User [1] Title [ “some title”] Message [“some message”]
-           System.out.printf("%s [%s]\n", item.getKey(), item.getValue());
-       }
+        Utilities.printResult(result);
     }
 
 }

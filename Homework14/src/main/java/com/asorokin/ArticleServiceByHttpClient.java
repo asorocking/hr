@@ -42,22 +42,14 @@ public class ArticleServiceByHttpClient implements ArticleService {
     @Override
     public String uploadToServer(int id) {
         String result;
-        //StringEntity params;
         String jsonString;
         HttpClient httpClient = HttpClientBuilder.create().build();
         try {
             HttpPost httppost = new HttpPost(URL);
-            System.out.println("Output from Server .... \n");
             
-            
-            jsonString = BuildJsonString.createJsonString(id);
-           // StringEntity params = new StringEntity(jsonString);
-            
-             StringEntity params = new StringEntity("{\"userId\": 1,\n"
-                    + "\"id\":" + id + ",\n"
-                    + "\"title\": \"some title\",\n"
-                    + "\"body\": \"some message\"}");
-            
+            jsonString = Utilities.createJsonString(id);
+           
+            StringEntity params = new StringEntity(jsonString);
             httppost.addHeader("content-type", "application/json");
             httppost.setEntity(params);
             HttpResponse response = httpClient.execute(httppost);

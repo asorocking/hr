@@ -57,13 +57,10 @@ public class ArticleServiceByHttpURLConnection implements ArticleService{
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
 
-            String input = "{\"userId\": 1,\n"
-                    + "\"id\":" + id + ",\n"
-                    + "\"title\": \"some title\",\n"
-                    + "\"body\": \"some message\"}";
+            String jsonString = Utilities.createJsonString(id);
 
             OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
+            os.write(jsonString.getBytes());
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
@@ -73,7 +70,6 @@ public class ArticleServiceByHttpURLConnection implements ArticleService{
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
             String output;
-            System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 result += output;
             }
