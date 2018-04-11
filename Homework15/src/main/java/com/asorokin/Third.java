@@ -1,8 +1,8 @@
-
 package com.asorokin;
 
 import java.io.*;
-
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,32 +16,40 @@ public class Third extends HttpServlet {
             throws ServletException, IOException {
 
         String userName = request.getParameter("userName");
+        List<Good> goods = ListOfGoods.getListOfGoods();
+
         response.setContentType("text/html");
         PrintWriter pw = response.getWriter();
-        
+
         pw.println("<center>");
-        pw.println("<B>Dear , " + userName + ", your oder:");
+        pw.println("<B>Dear, " + userName + ", your oder:");
         pw.println("<br>");
         pw.println("<br>");
-        
+
         Double total = 0.0;
         String[] selectedGoods = request.getParameterValues("goods");
+
         if (selectedGoods != null) {
-            int i = 0;
+            int i = 1;
             for (String item : selectedGoods) {
-                String keyValue[] = item.split("-");
-                pw.print((i+1) + ") " + keyValue[0] + " ");
-                pw.println(keyValue[1] + "$");
-                total += Double.valueOf(keyValue[1]);
+                Iterator<Good> iter = goods.iterator();
+                while (iter.hasNext()) {
+                    Good iterGood = iter.next();
+                    if (item.equals(iterGood.getGoodTitle())) {
+                        pw.print(i + ") " + iterGood.getGoodTitle() + " " 
+                                + +iterGood.getGoodPrice() + "$");
+                        total += iterGood.getGoodPrice();
+                    }
+                }
                 i++;
                 pw.println("<br>");
             }
         }
-        
+
         pw.println("<br>");
         pw.println("Total: $ " + total);
         pw.println("</center>");
-        
+
         pw.close();
     }
 }
