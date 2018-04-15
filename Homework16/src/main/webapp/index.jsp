@@ -1,7 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% if (HttpServletResponse.SC_NOT_FOUND == 1) {
-        ;
-    }%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +11,7 @@
         <h3>Welcome to Online Shop</h3>
         <form name="Form" 
               method="post" 
-              action="second.jsp"> 
+              action="choose"> 
             <input type="text" name="userName" size="15" placeholder="Enter your name!">
             <br>
             <input type="checkbox" name="chkBox" /><b>  I agree with the terms of service</b>
