@@ -18,25 +18,19 @@
         </h2>
         <p>
             <c:if test="${goods != null}">
-                <%
-                    List<Good> goods = (List<Good>) session.getAttribute("goods");
-                    Iterator<Good> iter = goods.iterator();
-                    int i = 1;
-
-                    while (iter.hasNext()) {
-                        Good iterGood = new Good();
-                        iterGood = iter.next();%>
-                        <p><%=i%>) <%=iterGood.getGoodTitle()%> 
-                           <%=iterGood.getGoodPrice()%>$
-                        </p>
-                    <%
-                         i++;
-                    }
-                    %>
+                <c:if test="${goods != null}">
+                    <c:forEach var="good" items="${goods}" varStatus="counter">
+                    <p>
+                        <c:out value="${counter.count}" />)
+                        <c:out value="${good.goodTitle}" /> 
+                        (<c:out value="${good.goodPrice}" /> $)
+                    </p>
+                </c:forEach>
             </c:if>
-        </p>
-    </center>
-        
+        </c:if>
+    </p>
+</center>
+
 <div align="center">
     <form action="order" method="post" > 
         <input type="hidden" name="userName" value="<%=request.getParameter("userName")%>">

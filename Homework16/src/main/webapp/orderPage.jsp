@@ -6,10 +6,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%  HttpServletRequest httpRequest = (HttpServletRequest) request;
-    HttpSession httpSession = httpRequest.getSession();
-%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,25 +17,16 @@
         <h3><b>Dear, <%=session.getAttribute("userName")%>, your oder:</b></h3>
             <p>
             <c:if test="${goods != null}">
-                <%
-                    List<Good> goods = (List<Good>) session.getAttribute("goods");
-                    Iterator<Good> iter = goods.iterator();
-                    int i = 1;
-                    float total = 0;
-
-                    while (iter.hasNext()) {
-                        Good iterGood = new Good();
-                        iterGood = iter.next();%>
-                        <p><%=i%>) <%=iterGood.getGoodTitle()%> 
-                           <%=iterGood.getGoodPrice()%>$
-                        </p>
-                    <%
-                         i++;
-                         total += iterGood.getGoodPrice();
-                    }
-                    %>
-            </p>
-            <p><b>Total: <%=total%>$ </b></p>
+                <c:if test="${goods != null}">
+                    <c:forEach var="good" items="${goods}" varStatus="counter">
+                    <p>
+                        <c:out value="${counter.count}" />)
+                        <c:out value="${good.goodTitle}" /> 
+                        (<c:out value="${good.goodPrice}" /> $)
+                    </p>
+                     </c:forEach>
+                </c:if>    
+            <p><b>Total: <c:out value="${total}"/>$ </b></p>
         </c:if>
         </center>
 </body>
