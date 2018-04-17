@@ -1,5 +1,8 @@
-package com.asorokin;
+package com.asorokin.dao;
 
+import com.asorokin.model.Good;
+import com.asorokin.model.Order;
+import com.asorokin.model.OrderGood;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

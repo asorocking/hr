@@ -1,16 +1,10 @@
-package com.asorokin;
-
-import java.util.ArrayList;
-import java.util.List;
-
+package com.asorokin.model;
 
 public class OrderGood {
        
     private int id;
     private int orderID;
     private int goodID;
-    //public static List<OrderGood> users = new ArrayList<OrderGood>();
-    
 
     public OrderGood() {
 

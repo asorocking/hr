@@ -1,5 +1,12 @@
-package com.asorokin;
+package com.asorokin.controller;
 
+import com.asorokin.dao.GoodDAO;
+import com.asorokin.dao.OrderDAO;
+import com.asorokin.dao.UserDAO;
+import com.asorokin.model.Good;
+import com.asorokin.model.Order;
+import com.asorokin.model.User;
+import com.asorokin.model.OrderGood;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Iterator;

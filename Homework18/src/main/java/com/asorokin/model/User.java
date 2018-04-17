@@ -1,5 +1,4 @@
-
-package com.asorokin;
+package com.asorokin.model;
 
 import java.util.ArrayList;
 import java.util.List;

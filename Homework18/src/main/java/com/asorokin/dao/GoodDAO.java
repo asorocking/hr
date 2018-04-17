@@ -1,5 +1,6 @@
-package com.asorokin;
+package com.asorokin.dao;
 
+import com.asorokin.model.Good;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,16 +10,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class GoodDAO {
 
     private String jdbcURL;
     private Connection jdbcConnection;
 
-    public UserDAO(String jdbcURL) {
+    public GoodDAO(String jdbcURL) {
         this.jdbcURL = jdbcURL;
     }
 
-    public UserDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
+    public GoodDAO(String jdbcURL, String jdbcUsername, String jdbcPassword) {
         this.jdbcURL = jdbcURL;
     }
 
@@ -43,33 +44,29 @@ public class UserDAO {
         connect();
 
         try (Statement statement = jdbcConnection.createStatement()) {
-            statement.execute("CREATE TABLE USER (id number auto_increment, login varchar(50), password varchar(20))");
+            statement.execute("CREATE TABLE GOOD (id number, title varchar(50), price number)");
+
+            statement.execute("INSERT into GOOD values(1,'Mobile Phone',10)");
+            statement.execute("INSERT into GOOD values(2,'Book',5)");
+            statement.execute("INSERT into GOOD values(3,'Pencil',0.3)");
+            statement.execute("INSERT into GOOD values(4,'Pen',1.2)");
+            statement.execute("INSERT into GOOD values(5,'Fireball',100)");
         } catch (SQLException ex) {
             System.out.println("initDB() failed: "
                     + ex.getMessage());
         }
         disconnect();
+
     }
 
-    public boolean insertUser(User user) throws SQLException {
-        String sql = "INSERT INTO USER (id, login, password) VALUES (?, ?, ?)";
-        connect();
-
-        PreparedStatement statement = jdbcConnection.prepareStatement(sql);
-        statement.setInt(1, user.getID());
-        statement.setString(2, user.getLogin());
-        statement.setString(3, user.getPassword());
-
-        boolean rowInserted = statement.executeUpdate() > 0;
-        statement.close();
-        disconnect();
-        return rowInserted;
+    public void insertGood(Good good) throws SQLException {
+        System.out.println("Inserted good");
     }
 
-    public List<User> listAllUsers() throws SQLException {
-        List<User> listUser = new ArrayList<>();
+    public List<Good> listAllGoods() throws SQLException {
+        List<Good> listGood = new ArrayList<>();
 
-        String sql = "SELECT * FROM USER";
+        String sql = "SELECT * FROM GOOD";
         connect();
 
         Statement statement = jdbcConnection.createStatement();
@@ -77,11 +74,11 @@ public class UserDAO {
 
         while (resultSet.next()) {
             int id = resultSet.getInt("id");
-            String login = resultSet.getString("login");
-            String password = resultSet.getString("password");
+            String title = resultSet.getString("title");
+            float price = resultSet.getFloat("price");
 
-            User user = new User(id, login, password);
-            listUser.add(user);
+            Good good = new Good(id, title, price);
+            listGood.add(good);
         }
 
         resultSet.close();
@@ -89,20 +86,20 @@ public class UserDAO {
 
         disconnect();
 
-        return listUser;
+        return listGood;
     }
 
-    public void deleteUser(User user) throws SQLException {
-        System.out.println("Deleted user");
+    public void deleteGood(Good good) throws SQLException {
+        System.out.println("Deleted good");
     }
 
-    public void updateUser(User user) throws SQLException {
-        System.out.println("Updated user");
+    public void updateGood(Good good) throws SQLException {
+        System.out.println("Updated good");
     }
 
-    public User getUser(int id) throws SQLException {
-        User user = null;
-        String sql = "SELECT * FROM USER WHERE id = ?";
+    public Good getGood(int id) throws SQLException {
+        Good good = null;
+        String sql = "SELECT * FROM GOOD WHERE id = ?";
 
         connect();
 
@@ -112,15 +109,15 @@ public class UserDAO {
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            String login = resultSet.getString("login");
-            String password = resultSet.getString("password");
+            String title = resultSet.getString("title");
+            float price = resultSet.getFloat("price");
 
-            user = new User(id, login, password);
+            good = new Good(id, title, price);
         }
 
         resultSet.close();
         statement.close();
 
-        return user;
+        return good;
     }
 }
