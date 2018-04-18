@@ -15,6 +15,10 @@ public class UserDAO {
     private String jdbcURL;
     private Connection jdbcConnection;
 
+    public UserDAO() {
+    
+    }
+    
     public UserDAO(String jdbcURL) {
         this.jdbcURL = jdbcURL;
     }

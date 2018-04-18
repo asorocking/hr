@@ -1,7 +1,4 @@
-<%@page import="java.util.List"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="com.asorokin.Good"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -10,7 +7,7 @@
     </head>
     <body>
     <center>
-        <h1>Hello, <%=session.getAttribute("userName")%>!</h1>
+        <h1>Hello, <c:out value="${userName}"/>!</h1>
         <h2>
             <c:if test="${listAllSelectedGood == null}">
                 Make your order
@@ -31,7 +28,6 @@
     </center>
 <div align="center">
     <form action="order" method="post" > 
-        <input type="hidden" name="userName" value="<%=request.getParameter("userName")%>">
         <select name="good">
             <c:forEach var="good" items="${listGoodDB}" varStatus="сounter">
                 <option value="<c:out value="${good.title}" />">

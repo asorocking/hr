@@ -1,8 +1,3 @@
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.asorokin.Good"%>
-<%@page import="java.io.PrintWriter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -16,7 +11,7 @@
     <center>
         <h3><b>Dear, <%=session.getAttribute("userName")%>, your oder:</b></h3>
         <p>
-         <c:if test="${listAllSelectedGood != null}">
+             <c:if test="${listAllSelectedGood != null}">
                 <c:forEach var="good" items="${listAllSelectedGood}" varStatus="сounter">
                 <p>
                     <c:out value="${сounter.count}" />)

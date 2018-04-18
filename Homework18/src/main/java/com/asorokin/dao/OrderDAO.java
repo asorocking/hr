@@ -15,7 +15,12 @@ import java.util.List;
 public class OrderDAO {
 
     private String jdbcURL;
+    
     private Connection jdbcConnection;
+
+    public OrderDAO() {
+        
+    }
 
     public OrderDAO(String jdbcURL) {
         this.jdbcURL = jdbcURL;

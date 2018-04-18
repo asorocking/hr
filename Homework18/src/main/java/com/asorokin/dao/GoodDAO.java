@@ -14,6 +14,10 @@ public class GoodDAO {
 
     private String jdbcURL;
     private Connection jdbcConnection;
+    
+    public GoodDAO() {
+     
+    }
 
     public GoodDAO(String jdbcURL) {
         this.jdbcURL = jdbcURL;

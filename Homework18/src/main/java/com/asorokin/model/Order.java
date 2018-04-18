@@ -9,7 +9,6 @@ public class Order {
     private int userID;
     private float totalPrice;
     public static List<Order> orders = new ArrayList<Order>();
-
     public Order() {
 
     }

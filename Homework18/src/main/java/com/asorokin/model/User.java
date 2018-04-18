@@ -10,6 +10,7 @@ public class User {
     private String login;
     private String password;
     public static List<User> users = new ArrayList<User>();
+    public static int userID = 1;
     
 
     public User() {

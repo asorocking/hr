@@ -13,7 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javaee-web-api.version>7.0</javaee-web-api.version>
-        <jetty-maven-plugin.version>9.3.0.RC1</jetty-maven-plugin.version>
+        <jetty-maven-plugin.version>9.4.9.v20180320</jetty-maven-plugin.version>
         <maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
         <maven-war-plugin.version>2.3</maven-war-plugin.version>
         <maven-dependency-plugin.version>2.6</maven-dependency-plugin.version>
