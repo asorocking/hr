@@ -1,6 +1,6 @@
 package com.asorokin.controller;
 
-import com.asorokin.service.InitService;
+import com.asorokin.dao.InitService;
 import com.asorokin.service.OrderService;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,8 +27,7 @@ public class ChooseServlet extends HttpServlet {
                 HttpServletRequest httpRequest = (HttpServletRequest) request;
                 HttpSession session = httpRequest.getSession();
 
-                //session.setAttribute("userName", request.getParameter("userName"));
-                session.getAttribute("userName");
+                session.setAttribute("userName", request.getParameter("userName"));
 
                 OrderService.choose(request, response);
             } catch (SQLException ex) {

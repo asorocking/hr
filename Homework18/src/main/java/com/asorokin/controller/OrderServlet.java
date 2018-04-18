@@ -19,7 +19,6 @@ public class OrderServlet extends HttpServlet {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             HttpSession session = httpRequest.getSession();
 
-            //session.setAttribute("userName", request.getParameter("userName"));
             session.getAttribute("userName");
 
             OrderService.order(request, response);

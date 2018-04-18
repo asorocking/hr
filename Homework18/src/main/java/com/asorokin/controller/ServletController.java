@@ -19,9 +19,6 @@ public class ServletController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpSession session = httpRequest.getSession();
-        session.setAttribute("userName", httpRequest.getParameter("userName"));
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("pages/index.jsp");
         dispatcher.forward(request, response);
